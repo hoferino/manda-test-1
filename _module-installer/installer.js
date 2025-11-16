@@ -100,177 +100,19 @@ class MandaModuleInstaller {
   }
 
   /**
-   * Initialize knowledge base with README files
+   * Initialize knowledge base (no README creation)
    */
   async initializeKnowledgeBase() {
     console.log('\n📚 Initializing knowledge base...');
-
-    // Create data room README
-    const dataRoomReadme = `# Data Room
-
-This directory will contain your deal-related documents.
-
-## Initial Setup
-
-When you first activate the Deal Orchestrator (\`/deal-orchestrator\`), you'll be guided through
-setting up your data room structure using one of these methods:
-
-1. **Your Information Request List (IRL)** - Upload your IRL and folders will be created automatically
-2. **Standard M&A Checklist** - Use our comprehensive due diligence checklist
-3. **Custom Structure** - Define your own category structure
-
-The folder structure will be created based on your choice, ensuring it matches your workflow.
-
-## Upload Area
-
-The \`upload/\` directory is ready for bulk document uploads:
-- Drop files in \`upload/pending/\`
-- Run \`/process-upload-area\` to classify and organize documents automatically
-- Documents are moved to appropriate categories after your approval
-
-## Document Processing
-
-Once your structure is set up, the Information Vault will:
-1. Automatically parse and index documents
-2. Extract key data points
-3. Generate embeddings for semantic search
-4. Cross-reference with existing knowledge
-
-## Supported Formats
-
-- PDF (with OCR support for scanned documents)
-- Excel (.xlsx, .xls)
-- Word (.docx, .doc)
-- PowerPoint (.pptx, .ppt)
-- Plain text (.txt, .md)
-
-## Best Practices
-
-1. Use descriptive filenames: \`2023-Audited-Financials.pdf\`
-2. Include dates in filenames when relevant
-3. Separate audited from unaudited financials
-4. Mark draft documents clearly
-5. Maintain original file names from company when possible
-
-## Get Started
-
-Run \`/deal-orchestrator\` to begin setting up your data room structure.
-`;
-
-    const dataRoomReadmePath = path.join(this.config.data_room_path, 'README.md');
-    if (!fs.existsSync(dataRoomReadmePath)) {
-      fs.writeFileSync(dataRoomReadmePath, dataRoomReadme);
-      console.log('  ✓ Created data room README');
-    }
-
-    // Create upload area README
-    const uploadAreaReadme = `# Upload Area
-
-This directory is for bulk document uploads and automated classification.
-
-## How It Works
-
-1. **Drop documents here:** Upload files to \`upload/pending/\`
-2. **Run classification:** Execute \`/process-upload-area\`
-3. **AI categorizes:** Documents are automatically sorted into appropriate categories
-4. **Review & approve:** You review the proposed classification
-5. **Auto-move:** Approved documents move to correct category folders
-
-## Directory Structure
-
-- **pending/** - Drop new documents here for processing
-- **processed/** - Successfully classified and moved documents (archived)
-- **archived/** - Historical record of processed batches
-
-## Benefits
-
-- Faster bulk uploads (don't need to sort manually)
-- AI-powered classification based on content analysis
-- Audit trail of all document movements
-- Safe review process before final placement
-
-## Usage
-
-\`\`\`bash
-# After uploading documents to pending/
-/process-upload-area
-\`\`\`
-
-The Document Classifier agent will analyze each file and suggest the best category.
-`;
-
-    const uploadAreaReadmePath = path.join(this.config.data_room_path, 'upload', 'README.md');
-    if (!fs.existsSync(uploadAreaReadmePath)) {
-      fs.writeFileSync(uploadAreaReadmePath, uploadAreaReadme);
-      console.log('  ✓ Created upload area README');
-    }
-
-    // Create knowledge base README
-    const kbReadme = `# Knowledge Base
-
-This directory contains the indexed and processed knowledge base for the M&A Deal Intelligence Platform.
-
-## Structure
-
-- **vector-store/** - Vector embeddings for semantic search (managed by RAG system)
-- **structured-data/** - Normalized financial data, contracts, org charts
-- **metadata/** - Document catalog, entity relationships, provenance tracking
-
-## Management
-
-The knowledge base is automatically managed by the Information Vault agent:
-- Documents are parsed and indexed on upload
-- Embeddings are generated using domain-aware models
-- Structured data is extracted and normalized
-- Metadata tracks all sources and provenance
-
-## Do Not Modify
-
-This directory is managed automatically. Manual changes may break the knowledge base.
-Use the Information Vault agent to query and manage data.
-`;
-
-    const kbReadmePath = path.join(this.config.knowledge_base_path, 'README.md');
-    if (!fs.existsSync(kbReadmePath)) {
-      fs.writeFileSync(kbReadmePath, kbReadme);
-      console.log('  ✓ Created knowledge base README');
-    }
+    console.log('  ✓ Knowledge base directories ready');
   }
 
   /**
-   * Setup output directories with templates
+   * Setup output directories (no README creation)
    */
   async setupOutputDirectories() {
     console.log('\n📄 Setting up output directories...');
-
-    const outputReadme = `# M&A Deal Intelligence Platform - Output
-
-This directory contains generated documents and analysis reports.
-
-## Directory Structure
-
-- **reports/** - Data room audits, analysis reports, due diligence findings
-- **storylines/** - Investment storyline briefs, thesis statements
-- **cims/** - Confidential Information Memorandums (narrative and slide versions)
-- **teasers/** - One-page investment teasers
-
-## File Naming Convention
-
-Files are automatically named with timestamps:
-- \`data-room-audit-2024-01-15.md\`
-- \`storyline-brief-2024-01-15.md\`
-- \`investment-teaser-2024-01-15.md\`
-
-## Version Control
-
-All generated documents are versioned. Previous versions are preserved in case you need to revert.
-`;
-
-    const outputReadmePath = path.join(this.config.output_location, 'README.md');
-    if (!fs.existsSync(outputReadmePath)) {
-      fs.writeFileSync(outputReadmePath, outputReadme);
-      console.log('  ✓ Created output directory README');
-    }
+    console.log('  ✓ Output directories ready');
   }
 
   /**
