@@ -1,0 +1,91 @@
+# M&A Deal Intelligence Platform - Module Configuration
+# This file stores user settings, paths, and preferences for the module
+
+# User Settings
+user_name: Max
+communication_language: English
+document_output_language: English
+
+# Paths (relative to project root where manda is installed)
+data_room_path: './data/deals'
+output_location: './output/manda'
+knowledge_base_path: './data/knowledge-base'
+
+# CIM Template Preferences
+template_preference: 'standard'  # Options: standard | modern | custom
+
+# Analysis Settings
+inconsistency_sensitivity: 'standard'  # Options: relaxed | standard | strict
+
+# Module Metadata
+module_version: '1.0.0'
+module_name: 'M&A Deal Intelligence Platform'
+module_code: 'manda'
+
+# Agent Configuration
+agents:
+  - code: 'deal-orchestrator'
+    name: 'Deal Orchestrator'
+    type: 'module'
+    enabled: true
+
+  - code: 'information-vault'
+    name: 'Information Vault'
+    type: 'service'
+    enabled: true
+
+  - code: 'company-analyst'
+    name: 'Company Analyst'
+    type: 'expert'
+    enabled: true
+
+  - code: 'finance-analyst'
+    name: 'Finance Analyst'
+    type: 'expert'
+    enabled: true
+
+  - code: 'story-architect'
+    name: 'Story Architect'
+    type: 'expert'
+    enabled: true
+
+# Workflow Configuration
+workflows:
+  - code: 'data-room-audit'
+    name: 'Data Room Audit'
+    enabled: true
+
+  - code: 'investment-storyline-workshop'
+    name: 'Investment Storyline Workshop'
+    enabled: true
+
+# RAG Configuration (for Information Vault)
+rag:
+  vector_store:
+    provider: 'chromadb'  # Options: chromadb | pinecone | weaviate
+    embedding_model: 'text-embedding-3-small'
+    chunk_size: 1000
+    chunk_overlap: 200
+
+  retrieval:
+    top_k: 20
+    similarity_threshold: 0.7
+    rerank: true
+    rerank_top_n: 10
+
+  metadata:
+    track_provenance: true
+    include_confidence: true
+
+# Output Settings
+output:
+  date_format: 'YYYY-MM-DD'
+  auto_save: true
+  version_control: true
+
+# Feature Flags
+features:
+  inconsistency_detection: true
+  assumption_validation: true
+  source_citation: true
+  storyline_first: true
