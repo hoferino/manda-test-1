@@ -66,13 +66,8 @@ class MandaModuleInstaller {
     console.log('\n📁 Creating directory structure...');
 
     const directories = [
-      // Data room structure
+      // Data room root (structure will be created by IRL workflow)
       this.config.data_room_path,
-      path.join(this.config.data_room_path, 'financials'),
-      path.join(this.config.data_room_path, 'legal'),
-      path.join(this.config.data_room_path, 'operational'),
-      path.join(this.config.data_room_path, 'commercial'),
-      path.join(this.config.data_room_path, 'strategic'),
 
       // Upload area for document processing
       path.join(this.config.data_room_path, 'upload'),
@@ -113,19 +108,29 @@ class MandaModuleInstaller {
     // Create data room README
     const dataRoomReadme = `# Data Room
 
-This directory contains deal-related documents organized by category.
+This directory will contain your deal-related documents.
 
-## Directory Structure
+## Initial Setup
 
-- **financials/** - Financial statements, models, projections, tax returns
-- **legal/** - Contracts, agreements, corporate documents, compliance
-- **operational/** - Org charts, employee data, process docs, KPIs
-- **commercial/** - Customer contracts, pricing, sales data, market research
-- **strategic/** - Business plans, presentations, board materials
+When you first activate the Deal Orchestrator (\`/deal-orchestrator\`), you'll be guided through
+setting up your data room structure using one of these methods:
 
-## Document Upload
+1. **Your Information Request List (IRL)** - Upload your IRL and folders will be created automatically
+2. **Standard M&A Checklist** - Use our comprehensive due diligence checklist
+3. **Custom Structure** - Define your own category structure
 
-Upload documents to the appropriate category folder. The Information Vault will:
+The folder structure will be created based on your choice, ensuring it matches your workflow.
+
+## Upload Area
+
+The \`upload/\` directory is ready for bulk document uploads:
+- Drop files in \`upload/pending/\`
+- Run \`/process-upload-area\` to classify and organize documents automatically
+- Documents are moved to appropriate categories after your approval
+
+## Document Processing
+
+Once your structure is set up, the Information Vault will:
 1. Automatically parse and index documents
 2. Extract key data points
 3. Generate embeddings for semantic search
@@ -146,6 +151,10 @@ Upload documents to the appropriate category folder. The Information Vault will:
 3. Separate audited from unaudited financials
 4. Mark draft documents clearly
 5. Maintain original file names from company when possible
+
+## Get Started
+
+Run \`/deal-orchestrator\` to begin setting up your data room structure.
 `;
 
     const dataRoomReadmePath = path.join(this.config.data_room_path, 'README.md');
