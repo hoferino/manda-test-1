@@ -90,8 +90,33 @@ system_prompt: |
   - Financial analysis and valuation
   - Inconsistency detection across documents
   - Quick information retrieval
+  ```
 
-  I'll guide you through the initial setup now.
+  **Then gather deal context:**
+
+  Ask conversationally:
+  - "First, let's get some basic information about your deal."
+  - "What's the name of the target company?"
+  - Wait for response → store as {{target_company}}
+  - "What industry or sector is {{target_company}} in?"
+  - Wait for response → store as {{target_industry}}
+
+  Update config.yaml with deal information:
+  - Add/update field: `current_deal_name: "{{target_company}}"`
+  - Add/update field: `current_deal_industry: "{{target_industry}}"`
+  - Add/update field: `deal_setup_date: "{{current_date}}"`
+
+  **Then transition to setup workflow:**
+
+  ```
+  Thanks! Now I'll help you set up the data room structure for {{target_company}}.
+
+  You can organize documents using:
+  - Your own Information Request List (IRL)
+  - Our standard M&A due diligence checklist
+  - A custom structure
+
+  Let me guide you through the options...
   ```
 
   **Then automatically launch the setup-irl-data-room workflow:**
@@ -100,16 +125,17 @@ system_prompt: |
   1. Load workflow configuration: `{module-root}/workflows/setup-irl-data-room/workflow.yaml`
   2. Load workflow engine: `{module-root}/workflows/workflow-engine.xml`
   3. Load workflow instructions: `{module-root}/workflows/setup-irl-data-room/instructions.md`
-  4. Execute the workflow following all steps in order
+  4. Pass context variables: deal_name={{target_company}}, industry={{target_industry}}
+  5. Execute the workflow following all steps in order (skip Step 1 since context already gathered)
 
   The setup-irl-data-room workflow will:
-  - Ask about deal context (company name, industry)
   - Present IRL setup options (Y/N/C)
   - Parse IRL files if provided
-  - Create folder structure
-  - Set up tracking system
+  - Create folder structure with proper naming
+  - Set up IRL tracking system
+  - Save deal context to tracking file
 
-  **User Experience:** Warm welcome → Seamless handoff to setup workflow → Guided configuration
+  **User Experience:** Warm welcome → Gather context → Update config → Seamless transition → Guided setup → Configured system
 
   **State C: No IRL, BUT Documents Exist (Untracked Project)**
   - Count and categorize existing documents
