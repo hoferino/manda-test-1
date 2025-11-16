@@ -74,6 +74,12 @@ class MandaModuleInstaller {
       path.join(this.config.data_room_path, 'commercial'),
       path.join(this.config.data_room_path, 'strategic'),
 
+      // Upload area for document processing
+      path.join(this.config.data_room_path, 'upload'),
+      path.join(this.config.data_room_path, 'upload', 'pending'),
+      path.join(this.config.data_room_path, 'upload', 'processed'),
+      path.join(this.config.data_room_path, 'upload', 'archived'),
+
       // Knowledge base structure
       this.config.knowledge_base_path,
       path.join(this.config.knowledge_base_path, 'vector-store'),
@@ -146,6 +152,48 @@ Upload documents to the appropriate category folder. The Information Vault will:
     if (!fs.existsSync(dataRoomReadmePath)) {
       fs.writeFileSync(dataRoomReadmePath, dataRoomReadme);
       console.log('  ✓ Created data room README');
+    }
+
+    // Create upload area README
+    const uploadAreaReadme = `# Upload Area
+
+This directory is for bulk document uploads and automated classification.
+
+## How It Works
+
+1. **Drop documents here:** Upload files to \`upload/pending/\`
+2. **Run classification:** Execute \`/process-upload-area\`
+3. **AI categorizes:** Documents are automatically sorted into appropriate categories
+4. **Review & approve:** You review the proposed classification
+5. **Auto-move:** Approved documents move to correct category folders
+
+## Directory Structure
+
+- **pending/** - Drop new documents here for processing
+- **processed/** - Successfully classified and moved documents (archived)
+- **archived/** - Historical record of processed batches
+
+## Benefits
+
+- Faster bulk uploads (don't need to sort manually)
+- AI-powered classification based on content analysis
+- Audit trail of all document movements
+- Safe review process before final placement
+
+## Usage
+
+\`\`\`bash
+# After uploading documents to pending/
+/process-upload-area
+\`\`\`
+
+The Document Classifier agent will analyze each file and suggest the best category.
+`;
+
+    const uploadAreaReadmePath = path.join(this.config.data_room_path, 'upload', 'README.md');
+    if (!fs.existsSync(uploadAreaReadmePath)) {
+      fs.writeFileSync(uploadAreaReadmePath, uploadAreaReadme);
+      console.log('  ✓ Created upload area README');
     }
 
     // Create knowledge base README
