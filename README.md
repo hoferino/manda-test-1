@@ -70,19 +70,20 @@ The M&A Deal Intelligence Platform is an intelligent agent framework designed sp
 ## Installation
 
 ```bash
-# Clone or download the platform
-git clone [repository-url] manda-platform
-cd manda-platform
+# Clone the repository
+git clone https://github.com/hoferino/manda-test-1.git
+cd manda-test-1
 
 # Run the installer
-node _module-installer/installer.js
+node install.js
 ```
 
-During installation, you'll configure:
-- Output locations for generated documents
-- Data room integration settings
-- Knowledge base paths
-- Document templates
+The installer will automatically create:
+- Data room structure (`data/deals/` with upload area)
+- Knowledge base directories (`data/knowledge-base/`)
+- Output directories (`output/manda/`)
+
+No configuration prompts - uses sensible defaults from `config.yaml`
 
 ## Quick Start
 
